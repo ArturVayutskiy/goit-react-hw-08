@@ -1,0 +1,13 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: black;
+  margin-left: 20px;
+}
