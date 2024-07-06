@@ -1,7 +1,12 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-
-import { addContact, deleteContact, fetchContacts } from "./operations";
+import {
+  addContact,
+  deleteContact,
+  fetchContacts,
+  updateContact,
+} from "./operations";
 import { selectNameFilter } from "../filter/selectors";
+import toast from "react-hot-toast";
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -25,15 +30,16 @@ const contactsSlice = createSlice({
         state.error = true;
       })
       .addCase(addContact.pending, (state) => {
-        console.log(addContact.pending);
         state.error = false;
         state.loading = true;
       })
       .addCase(addContact.fulfilled, (state, action) => {
+        toast.success("The contact has been added!");
         state.loading = false;
         state.items.push(action.payload);
       })
       .addCase(addContact.rejected, (state) => {
+        toast.error("The contact hasn't been added!");
         state.loading = false;
         state.error = true;
       })
@@ -42,6 +48,7 @@ const contactsSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
+        toast.success("The contact has been deleted!");
         state.loading = false;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
@@ -50,6 +57,23 @@ const contactsSlice = createSlice({
       .addCase(deleteContact.rejected, (state) => {
         state.loading = false;
         state.error = true;
+      })
+      .addCase(updateContact.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(updateContact.fulfilled, (state, action) => {
+        toast.success("The contact has been updated!");
+        state.status = "succeeded";
+        const index = state.items.findIndex(
+          (contact) => contact.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(updateContact.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       }),
 });
 

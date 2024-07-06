@@ -7,11 +7,12 @@ import css from "./LoginForm.module.css";
 import { login } from "../../redux/auth/operations";
 
 const contactSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email address!").required("Required!"),
+  email: Yup.string()
+    .email("Fill correct email address!")
+    .required("This field is required!"),
   password: Yup.string()
-    .min(5, "Too Short!")
-    .max(12, "Too Long!")
-    .required("Required!"),
+    .min(5, "This field must contain at least 5 characters!")
+    .required("This field is required!"),
 });
 
 export default function LoginForm() {

@@ -30,7 +30,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
-      .addCase(login.rejected, () => toast.error("Incorrect user data!"))
+      .addCase(login.rejected, () => toast.error("Email or Password is wrong!"))
       .addCase(logout.fulfilled, (state) => {
         state.user = { name: null, email: null };
         state.token = null;

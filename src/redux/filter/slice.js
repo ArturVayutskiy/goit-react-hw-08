@@ -9,8 +9,11 @@ const filtersSlice = createSlice({
     changeFilter(state, action) {
       state.name = action.payload;
     },
+    changeNumberFilter(state, action) {
+      state.number = action.payload;
+    },
   },
 });
 
-export const { changeFilter } = filtersSlice.actions;
+export const { changeFilter, changeNumberFilter } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

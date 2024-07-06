@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SearchBox = () => {
   const filter = useSelector(selectNameFilter);
+
   const dispatch = useDispatch();
 
   return (
     <div className={css.searchBox}>
       <label className={css.searchTitle} htmlFor="search-field">
-        Find contacts by name
+        Find contacts
       </label>
       <input
         className={css.searchInput}
